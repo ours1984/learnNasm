@@ -3,6 +3,7 @@
 
 # Object files
 *.o
+*.ao
 *.ko
 *.obj
 *.elf
@@ -41,6 +42,7 @@
 *.su
 *.idb
 *.pdb
+*.img
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,4 +52,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
 test
+main
+*.c
+*.cpp
+bx_enh_dbg.ini
