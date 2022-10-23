@@ -53,8 +53,10 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-test
-main
-*.c
-*.cpp
-bx_enh_dbg.ini
+build/*
+output/*
+!output/bochsrc
+.gdb_history
+*.ini
+*.s
+peda-session-cpptest.txt

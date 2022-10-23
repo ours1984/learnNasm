@@ -1,7 +1,5 @@
 #cpp 编译链接选项
 FLAGS := -Wall
-#asm 链接选项
-ALFLG =
 #asm 编译选项
 ACFLG =
 #asm 调试选项
@@ -9,19 +7,19 @@ ADFLG =
 
 ifdef m32
 	FLAGS += -m32
-	ACFLG = elf32
-	ALFLG = elf_i386
-else
-	ACFLG = elf64
-	ALFLG = elf_x86_64
+	ACFLG =-f elf32
+endif
+
+ifdef m64
+	ACFLG =-f elf64
 endif
 
 ifdef pg
-	FLAGS +=  -pg
+	FLAGS += -pg
 endif
 
 ifdef cv
-	FLAGS +=  -fprofile-arcs -ftest-coverage
+	FLAGS += -fprofile-arcs -ftest-coverage
 endif
 
 ifdef debug
@@ -50,18 +48,23 @@ endif
 OBJP = ${patsubst %.cpp,$(TMPDIR)/%.po,${wildcard *.cpp}}
 OBJC = ${patsubst %.c,$(TMPDIR)/%.co,${wildcard *.c}}
 OBJA = ${patsubst %.asm,$(TMPDIR)/%.ao,${wildcard *.asm}}
-OBJ = ${OBJC} ${OBJP}
+OBJA32 = ${patsubst %.asm32,$(TMPDIR)/%.a32,${wildcard *.asm32}}
+OBJA64 = ${patsubst %.asm64,$(TMPDIR)/%.a64,${wildcard *.asm64}}
 
-${TARGET}_asm:${OBJA}
-	${RM} ${OUTDIR}/${TARGET}
-	ld -m ${ALFLG} $^ -o ${OUTDIR}/${TARGET}
+OBJ = ${OBJC} ${OBJP} ${OBJA}
+ifdef m32
+	OBJ += ${OBJA32} 
+endif
+ifdef m64
+	OBJ += ${OBJA64} 
+endif
+
+${TARGET}_emp:${OBJ}
 
 ${TARGET}_exe:${OBJ}
-	${RM} ${OUTDIR}/${TARGET}
-	${CXX} ${FLAGS} ${LDPATH} $^ ${LDFLAGS} -o ${OUTDIR}/${TARGET}
+	${CC} ${FLAGS} ${LDPATH} $^ ${LDFLAGS} -o ${OUTDIR}/${TARGET}
 
 ${TARGET}_static:${OBJ}
-	${RM} ${OUTDIR}/lib${TARGET}.a
 	${AR} rsc ${OUTDIR}/lib${TARGET}.a $^
 
 ${TARGET}_dynamic:${OBJ}
@@ -75,16 +78,22 @@ $(TMPDIR)/%.co:%.c
 	${CC} -c ${FLAGS} ${INCPATH} $^ -o $@
 
 $(TMPDIR)/%.ao:%.asm
-	nasm -f ${ACFLG} ${ADFLG} $< -o $@
+	nasm ${ACFLG} ${ADFLG} $< -o $@
 
-.PHONY:clean show
+$(TMPDIR)/%.a32:%.asm32
+	nasm -f elf32 ${ADFLG} $< -o $@
+
+$(TMPDIR)/%.a64:%.asm64
+	nasm -f elf64 ${ADFLG} $< -o $@
+
+.PHONY:show clean
 
 clean:
-	@${RM} ${OBJ} ${OBJA} ${OUTDIR}/${TARGET} ${OUTDIR}/lib${TARGET}.* *.o *.out
+	@${RM} ${TMPDIR}/*
 	clear
 
 show:
-	@echo TARGET:${TARGET}_exe
+	@echo TARGET:${OBJA32}_exe
 	@echo LDPATH:${LDPATH}
 	@echo INCPATH:${INCPATH}
 	@echo OUTDIR:${OUTDIR}

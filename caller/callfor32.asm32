@@ -1,0 +1,21 @@
+section .text
+
+extern callForAsm
+
+global callFromC
+callFromC:
+    push ebp;
+    mov ebp,esp
+
+    mov eax,dword[ebp+12];第二个参数
+    push eax
+    mov eax,dword[ebp+8];第一个参数
+    push eax
+
+    call callForAsm
+
+    add esp,8    ;callForAsm外平栈
+
+    mov esp,ebp
+    pop ebp
+    ret        ;callFromC外平栈

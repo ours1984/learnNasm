@@ -1,0 +1,15 @@
+section .text
+
+extern callForAsm
+
+global callFromC
+callFromC:
+
+    endbr64
+
+    ;mov edi,edi ;第一个参数
+    ;mov rsi,rdi;第二个参数
+    
+    call callForAsm;不需要平栈
+
+    ret        ;不需要平栈
