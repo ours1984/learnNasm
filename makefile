@@ -1,6 +1,6 @@
 
 PWD := ${shell pwd}
-DIR = boot caller
+DIR = boot caller class
 
 OUTDIR := ${PWD}/output
 export OUTDIR

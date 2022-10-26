@@ -62,7 +62,7 @@ endif
 ${TARGET}_emp:${OBJ}
 
 ${TARGET}_exe:${OBJ}
-	${CC} ${FLAGS} ${LDPATH} $^ ${LDFLAGS} -o ${OUTDIR}/${TARGET}
+	${CXX} ${FLAGS} ${LDPATH} $^ ${LDFLAGS} -o ${OUTDIR}/${TARGET}
 
 ${TARGET}_static:${OBJ}
 	${AR} rsc ${OUTDIR}/lib${TARGET}.a $^
@@ -72,7 +72,7 @@ ${TARGET}_dynamic:${OBJ}
 	${CXX} ${FLAGS}  ${LDPATH} -fpic -shared  $^ ${LDFLAGS}  -o ${OUTDIR}/lib${TARGET}.so
 
 $(TMPDIR)/%.po:%.cpp
-	${CC} -c ${FLAGS} ${INCPATH} $^ -o $@
+	${CXX} -c ${FLAGS} ${INCPATH} $^ -o $@
 
 $(TMPDIR)/%.co:%.c
 	${CC} -c ${FLAGS} ${INCPATH} $^ -o $@
