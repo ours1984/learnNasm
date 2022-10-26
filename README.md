@@ -16,6 +16,8 @@ class文件夹
 
 [玩转系统执行流](https://blog.ours1984.top/posts/enterl/)
 
+make m32=1 class
+
 ## 汇编和C的相互调用
 
 caller文件夹
