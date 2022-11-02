@@ -1,10 +1,10 @@
 ;[ORG  0x7c00]
-section maintext vstart=0x7c00
+section .text vstart=0x7c00
 BOOT_MAIN_ADDR equ 0x7E00
 ;extern print
-[BITS 16]
-global boot_start
-boot_start:
+;[BITS 16]
+global _start
+_start:
     ; 设置屏幕模式为文本模式，清除屏幕
     mov ax, 3
     int 0x10
@@ -24,11 +24,11 @@ jz .readf
     mov si, selhd
     jmp .end
     
-.readf
+.readf:
     call readFlopy
     mov si, selfp
 
-.end
+.end:
     call    print
     jmp     BOOT_MAIN_ADDR
 

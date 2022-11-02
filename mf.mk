@@ -45,6 +45,7 @@ ifndef TMPDIR
 	TMPDIR = .
 endif
 
+FLAGS:=$(strip ${FLAGS})
 OBJP = ${patsubst %.cpp,$(TMPDIR)/%.po,${wildcard *.cpp}}
 OBJC = ${patsubst %.c,$(TMPDIR)/%.co,${wildcard *.c}}
 OBJA = ${patsubst %.asm,$(TMPDIR)/%.ao,${wildcard *.asm}}
@@ -90,7 +91,7 @@ $(TMPDIR)/%.a64:%.asm64
 
 clean:
 	${RM} ${TMPDIR}/* ${OUTDIR}/${TARGET}
-#clear
+	clear
 
 show:
 	@echo TARGET:${TARGET}

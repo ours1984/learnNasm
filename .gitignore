@@ -55,7 +55,7 @@ dkms.conf
 
 build/*
 output/*
-!output/bochsrc
+!output/bochs
 .gdb_history
 *.ini
 *.s

@@ -1,6 +1,6 @@
 
 PWD := ${shell pwd}
-DIR = kernel/boot call/caller call/class
+DIR = kernel/boot kernel/init call/caller call/class call/test
 
 OUTDIR := ${PWD}/output
 export OUTDIR
@@ -18,23 +18,18 @@ ${DIR}:
 clean:
 	for dir in ${DIR};do ${MAKE} -C $${dir} clean;done
 
-bochsfp:bootload ddfp
-	bochs -q -f output/bochsfp
+bochs:kernel/boot system ddhd
+	bochs -q -f output/bochs
 
-bochshd:bootload ddhd
-	bochs -q -f output/bochshd
+system:kernel/init
+	objcopy -O binary ${OUTDIR}/init ${TMPDIR}/system.bin 
 
-bootload:kernel/boot
-
-ddfp:${TMPDIR}/setupfp.ao ${TMPDIR}/boot.ao
-	dd if=${TMPDIR}/boot.ao of=$(OUTDIR)/fp.img bs=512 skip=0 seek=0 count=1 conv=notrunc
-	dd if=${TMPDIR}/setupfp.ao of=$(OUTDIR)/fp.img bs=512 skip=0 seek=1 count=1 conv=notrunc
-
-ddhd:${TMPDIR}/setuphd.ao ${TMPDIR}/boot.ao
+ddhd:${TMPDIR}/setup.ao ${TMPDIR}/boot.ao
 	dd if=${TMPDIR}/boot.ao of=$(OUTDIR)/hd.img bs=512 skip=0 seek=0 count=1 conv=notrunc
-	dd if=${TMPDIR}/setuphd.ao of=$(OUTDIR)/hd.img bs=512 skip=0 seek=1 count=1 conv=notrunc
+	dd if=${TMPDIR}/setup.ao of=$(OUTDIR)/hd.img bs=512 skip=0 seek=1 count=1 conv=notrunc
+	dd if=${TMPDIR}/system.bin of=$(OUTDIR)/hd.img bs=512 seek=3 count=60 conv=notrunc
 
 .PHONY:img
 img:
 	bximage -q -hd=16 -func=create -sectsize=512 -imgmode=flat $(OUTDIR)/hd.img
-	bximage -q -fd=1.44M -func=create -sectsize=512 -imgmode=flat $(OUTDIR)/fp.img
+#	bximage -q -fd=1.44M -func=create -sectsize=512 -imgmode=flat $(OUTDIR)/fp.img
