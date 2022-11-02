@@ -89,11 +89,11 @@ $(TMPDIR)/%.a64:%.asm64
 .PHONY:show clean
 
 clean:
-	@${RM} ${TMPDIR}/*
-	clear
+	${RM} ${TMPDIR}/* ${OUTDIR}/${TARGET}
+#clear
 
 show:
-	@echo TARGET:${OBJA32}_exe
+	@echo TARGET:${TARGET}
 	@echo LDPATH:${LDPATH}
 	@echo INCPATH:${INCPATH}
 	@echo OUTDIR:${OUTDIR}

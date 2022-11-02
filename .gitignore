@@ -60,4 +60,3 @@ output/*
 *.ini
 *.s
 peda*
-debug/debug.c
