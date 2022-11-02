@@ -59,4 +59,5 @@ output/*
 .gdb_history
 *.ini
 *.s
-peda-session-cpptest.txt
+peda*
+debug/debug.c

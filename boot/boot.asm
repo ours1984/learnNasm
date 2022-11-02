@@ -33,31 +33,27 @@ jz .readf
     jmp     BOOT_MAIN_ADDR
 
 ; 如何调用
-; call    readFlopy     ; 2 调用
+; call    readDisk     ;
 readDisk:
     pusha
-    mov ecx, 2  ; 从硬盘哪个扇区开始读
-    mov bl, 1   ; 读取的扇区数量
-
     ; 0x1f2 8bit 指定读取或写入的扇区数
     mov dx, 0x1f2
-    mov al, bl
+    mov al, 1; 读取的扇区数量
     out dx, al
 
     ; 0x1f3 8bit iba地址的第八位 0-7
     inc dx
-    mov al, cl
+    mov al, 2; ; 起始扇区编号，32bit中的低8位
     out dx, al
 
     ; 0x1f4 8bit iba地址的中八位 8-15
     inc dx
-    mov al, ch      ; 取中8位
+    mov al, 0      ; 取中8位
     out dx, al
 
     ; 0x1f5 8bit iba地址的高八位 16-23
     inc dx
-    shr ecx, 16
-    mov al, cl
+    mov al, 0
     out dx, al
 
     ; 0x1f6 8bit
@@ -100,7 +96,7 @@ readDisk:
     ret
 
 ; 如何调用
-; call    readFlopy     ; 2 调用
+; call    readFlopy
 readFlopy:
     pusha
     mov     dh, 0   ; 0 磁头
