@@ -18,7 +18,7 @@ boot:disk
 
 #硬盘
 ata0: enabled=true, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
-ata0-master: type=disk, path="output/hd.img", mode=flat
+ata0-master: type=disk, path="../build/hd.img", mode=flat
 ata0-slave: type=none
 
 # 这两个一起开启

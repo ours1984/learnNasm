@@ -54,9 +54,7 @@ Mkfile.old
 dkms.conf
 
 build/*
-output/*
-!output/bochs
-.gdb_history
+*.gdb_history
 *.ini
 *.s
 peda*

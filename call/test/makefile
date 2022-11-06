@@ -3,7 +3,7 @@ TARGET = test
 
 all:${TARGET}_exe
 
-include ../../mf.mk
+include ../../compile.mk
 
 FLAGS += -fno-stack-protector #不需要栈溢出
 FLAGS += -no-pie	#不需要位置无关exe

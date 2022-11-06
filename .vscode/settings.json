@@ -1,4 +1,19 @@
 {
     "masmtasm.ASM.assembler": "MASM",
-    "masmtasm.ASM.emulator": "dosbox"
+    "masmtasm.ASM.emulator": "dosbox",
+    "files.associations": {
+        "*.latex": "latex",
+        "*.user": "cmake",
+        "*.asm": "asm-intel-x86-generic",
+        "*.asm32": "asm-intel-x86-generic",
+        "string.h": "c",
+        "system.h": "c",
+        "graphic.h": "c",
+        "io.h": "c",
+        "types.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
+    }
 }

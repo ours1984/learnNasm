@@ -1,32 +1,45 @@
 # learNasm
 
-## 实模式启动
+![20221106221108](https://pic.ours1984.top/img/20221106221108.png!shuiyin)
 
-boot文件夹
+```shell
+make call  //生成执行流
+make os    //生成内核
+```
 
-[实战实模式](https://blog.ours1984.top/posts/sets/)
+## [你好世界VGA绘制](https://blog.ours1984.top/posts/sets/)
 
-1. make img
-2. make bochsfp//软盘启动
-3. make bochshd//硬盘启动
+![20221106221108](https://pic.ours1984.top/img/20221106221108.png!shuiyin)
 
-## 堆栈图和执行流
+```shell
+cd os
+make qemug m32=1 debug=1 //32位gdb调试
+make bochs m64=1 //64位bochs启动
+make m32=1 build //生成内核,不启动仿真
+```
 
-class文件夹
+就是拿坐标,画直线,哈哈哈
 
-[玩转系统执行流](https://blog.ours1984.top/posts/enterl/)
+![20221106221204](https://pic.ours1984.top/img/20221106221204.png!shuiyin)
 
-make m32=1 class
+.vocode文件夹配置了vscode调试信息
 
-## 汇编和C的相互调用
+qemug启动调试后,vscode下直接F5可以远程调试
 
-caller文件夹
+## [玩转系统执行流](https://blog.ours1984.top/posts/enterl/)
 
-[玩转系统执行流](https://blog.ours1984.top/posts/enterl/)
+call文件夹下为汇编执行流学习代码,以及汇编32位64位和c相互调用
 
-make m32=1 caller//32位实例
-make m64=1 caller//64位实例
+```shell
+cd call
+make m32=1 //32位实例
+make m64=1 //64位实例
+make m32=1 debug=1 //生成调试信息
+```
 
-## makefile
+## makefile学习
+
+compile.mk编译生成可执行文件
+comfig.mk组织文件夹
 
 [学习 nasm 汇编](https://blog.ours1984.top/posts/huibian/)

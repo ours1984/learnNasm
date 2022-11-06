@@ -1,0 +1,50 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+            "type": "shell",
+            "label": "runqemu",
+            "command": "make",
+            "args": [
+                "qemug",
+                "m32 = 1",
+                "debug = 1"
+            ],
+            "group": {
+                "kind": "test",
+            },
+        },
+        {
+            "type": "shell",
+            "label": "buildos",
+            "command": "make",
+            "args": [
+                "os",
+                "m32 = 1",
+                "debug = 1"
+            ],
+            "group": {
+                "kind": "build",
+            },
+        },
+        {
+            "type": "shell",
+            "label": "runbochs",
+            "command": "make",
+            "args": [
+                "bochs",
+                "m32 = 1"
+            ],
+            "options": {
+                //"cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "test",
+            },
+            //"detail": "编译器: /usr/bin/g++"
+        }
+    ]
+}
