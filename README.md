@@ -20,7 +20,9 @@ make build m32=1 //生成内核,不启动仿真
 
 ![20221106221204](https://pic.ours1984.top/img/20221106221204.png!shuiyin)
 
-.vocode文件夹配置了vscode调试信息
+.vocode文件夹配置了vscode调试信息,gdb64为64位调试.
+
+64 bit下graphic暂时有问题,屏蔽掉(不调用接口)才能正常运行
 
 qemug启动调试后,vscode下直接F5可以远程调试
 
