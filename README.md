@@ -1,7 +1,5 @@
 # learNasm
 
-![20221106221108](https://pic.ours1984.top/img/20221106221108.png!shuiyin)
-
 ```shell
 make call  //生成执行流
 make os    //生成内核
