@@ -1,5 +1,5 @@
 
-DIR = caller class test
+DIR = caller class
 PWD := ${shell pwd}
 OUTDIR := ${PWD}/../build
 TMPDIR := ${PWD}/../build/tmp

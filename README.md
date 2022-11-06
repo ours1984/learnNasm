@@ -12,7 +12,7 @@ make os    //生成内核
 ```shell
 cd os
 make qemug m32=1 debug=1 //32位gdb调试
-make bochs m64=1 //64位bochs启动
+make qemug64 m64=1 debug=1 //64位gdb+qemu启动,graphic画图暂时有问题
 make build m32=1 //生成内核,不启动仿真
 ```
 
@@ -31,7 +31,7 @@ call文件夹下为汇编执行流学习代码,以及汇编32位64位和c相互�
 ```shell
 cd call
 make m32=1 //32位实例
-make m64=1 //64位实例
+make m64=1 //64位实例 graphic暂未适配64位
 make m32=1 debug=1 //生成调试信息
 ```
 

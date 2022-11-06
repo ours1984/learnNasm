@@ -10,8 +10,8 @@ include ../config.mk
 qemug:build
 	qemu-system-i386 -m 32M -hda ../build/hd.img -S -s
 
-qemu:build
-	qemu-system-i386 -m 32M -boot c -hda ../build/hd.img
+qemug64:build
+	qemu-system-x86_64 -m 320M -hda ../build/hd.img -S -s
 
 bochs:build
 	rm -f $(OUTDIR)/*.lock
