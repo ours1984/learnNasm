@@ -13,7 +13,7 @@ make os    //生成内核
 cd os
 make qemug m32=1 debug=1 //32位gdb调试
 make bochs m64=1 //64位bochs启动
-make m32=1 build //生成内核,不启动仿真
+make build m32=1 //生成内核,不启动仿真
 ```
 
 就是拿坐标,画直线,哈哈哈
