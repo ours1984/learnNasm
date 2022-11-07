@@ -1,0 +1,107 @@
+[SECTION .text]
+[BITS 64]
+extern kernel_main
+
+global _start
+_start:
+    call kernel_main
+_io_hlt:
+    hlt
+    jmp _io_hlt
+
+
+global in_byte
+in_byte:
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+    xor eax, eax
+    mov rdx, rdi      ; port
+    in al, dx
+    ret
+
+global out_byte
+out_byte:
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+    mov rdx, rdi     ; port
+    mov rax, rsi     ; value
+    out dx, al
+    ret
+
+global in_word
+in_word:
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+
+    xor rax, rax
+    mov rdx, rdi     ; port
+    in ax, dx
+    ret
+
+global out_word
+out_word:
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+
+    mov rdx, rdi     ; port
+    mov rax, rsi     ; value
+    out dx, ax
+
+    ret
+
+GLOBAL io_in8, io_in16, io_in32
+GLOBAL io_out8, io_out16, io_out32
+GLOBAL io_load_eflags, io_store_eflags
+
+io_in8: ; int io_in8(int port);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi ; port
+ MOV rax,0
+ IN AL,DX
+ RET
+io_in16: ; int io_in16(int port);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi ; port
+ MOV rax,0
+ IN AX,DX
+ RET
+io_in32: ; int io_in32(int port);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi; port
+ IN EAX,DX
+ RET
+io_out8: ; void io_out8(int port, int data);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi ; port
+ MOV rax,rsi ; data
+ OUT DX,AL
+ RET
+io_out16: ; void io_out16(int port, int data);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi ; port
+ MOV rax,rsi ; data
+
+ OUT DX,AX
+ RET
+io_out32: ; void io_out32(int port, int data);
+    ;mov rdi,rdi ;第一个参数
+    ;mov rsi,rsi;第二个参数
+ MOV rdx,rdi ; port
+ MOV rax,rsi ; data
+
+ OUT DX,EAX
+ RET
+io_load_eflags: ; int io_load_eflags(void);
+ PUSHFQ ; 指 PUSH EFLAGS 
+ POP rax
+ RET
+io_store_eflags: ; void io_store_eflags(int eflags);
+ MOV rax,rdi
+ PUSH rax
+ POPFQ ; 指 POP EFLAGS
+ RET
